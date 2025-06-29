@@ -1,0 +1,7 @@
+{
+  "global_level": "Trace",
+  "module_levels": {
+    "module1": "Debug",
+    "module2": "Error"
+  }
+}

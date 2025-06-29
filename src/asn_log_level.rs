@@ -1,8 +1,9 @@
 use log::LevelFilter;
+use serde::{Deserialize, Serialize};
 use std::fmt::{Display, Formatter};
 
 #[repr(usize)]
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug, Hash, Serialize, Deserialize)]
 pub enum AsnLogLevel {
     Off,
     Error,
