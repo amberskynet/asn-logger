@@ -1,9 +1,9 @@
-use log::LevelFilter;
+use crate::asn_log_config::AsnLogConfig;
 
-#[allow(dead_code)]
-pub fn init_log(global_log_filter: LevelFilter) {
+pub fn configure_logging(c: &AsnLogConfig) {
     let mut builder = fern::Dispatch::new();
     let level_formatter;
+
     #[cfg(target_arch = "wasm32")]
     {
         level_formatter = |level| level;
@@ -18,10 +18,9 @@ pub fn init_log(global_log_filter: LevelFilter) {
         level_formatter = move |level| colors.color(level);
         builder = builder.chain(std::io::stdout());
     }
-    builder
-        .level(global_log_filter)
-        .level_for("wgpu_core", log::LevelFilter::Off)
-        .level_for("wgpu_hal", log::LevelFilter::Off)
+
+    builder = builder
+        .level(c.global_level.into())
         // .level_for(module_path!(), log::LevelFilter::Info)
         .format(move |out, message, record| {
             out.finish(format_args!(
@@ -32,7 +31,13 @@ pub fn init_log(global_log_filter: LevelFilter) {
                 record.line().unwrap_or_default(),
                 message
             ))
-        })
-        .apply()
-        .unwrap();
+        });
+
+    for (module, level) in &c.module_levels {
+        let m = module.clone();
+        let l = (*level).into();
+        builder = builder.level_for(m, l);
+    }
+
+    builder.apply().unwrap();
 }
