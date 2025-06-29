@@ -1,3 +1,4 @@
+use log::LevelFilter;
 use std::fmt::{Display, Formatter};
 
 #[repr(usize)]
@@ -34,6 +35,19 @@ impl AsnLogLevel {
             "debug" => Ok(AsnLogLevel::Debug),
             "trace" => Ok(AsnLogLevel::Trace),
             _ => Err(String::from(&format!("Unknown log level: {}", s))),
+        }
+    }
+}
+
+impl From<AsnLogLevel> for LevelFilter {
+    fn from(level: AsnLogLevel) -> LevelFilter {
+        match level {
+            AsnLogLevel::Off => LevelFilter::Off,
+            AsnLogLevel::Error => LevelFilter::Error,
+            AsnLogLevel::Warn => LevelFilter::Warn,
+            AsnLogLevel::Info => LevelFilter::Info,
+            AsnLogLevel::Debug => LevelFilter::Debug,
+            AsnLogLevel::Trace => LevelFilter::Trace,
         }
     }
 }

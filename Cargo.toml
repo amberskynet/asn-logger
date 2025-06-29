@@ -17,3 +17,7 @@ fern = { version = "0.7.1", features = ["colored"] }
 chrono = { version = "0.4.41", features = ["wasmbind"] }
 console_error_panic_hook = "0.1.7"
 console_log = { version = "1.0.0", features = ["color"]}
+
+[[example]]
+name = "example_1"
+required-features = ["test_messages"]

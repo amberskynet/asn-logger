@@ -1,16 +1,17 @@
 extern crate log;
 
+mod asn_log_config;
 mod asn_log_level;
-mod log_level;
-mod mapper;
+mod utils_setup;
 
-use crate::mapper::convert;
+pub use asn_log_config::AsnLogConfig;
 pub use asn_log_level::AsnLogLevel;
-use log::{debug, error, info, trace, warn};
 
-pub fn init_log(l: AsnLogLevel) {
-    let log_level_filter = convert(l);
-    log_level::init_log(log_level_filter);
+use log::{debug, error, info, trace, warn};
+use utils_setup::configure_logging;
+
+pub fn init_log(c: &AsnLogConfig) {
+    configure_logging(c);
 
     cfg_if::cfg_if! {
     if #[cfg(target_arch = "wasm32")] {
@@ -22,30 +23,30 @@ pub fn init_log(l: AsnLogLevel) {
 
     #[cfg(feature = "test_messages")]
     {
-        trace("asn-logger", "App tracing");
-        warn("asn-logger", "App warning");
-        info("asn-logger", "App info");
-        debug("asn-logger", "App debug");
         error("asn-logger", "App error");
+        debug("asn-logger", "App debug");
+        info("asn-logger", "App info");
+        warn("asn-logger", "App warning");
+        trace("asn-logger", "App tracing");
     }
 }
 
 pub fn trace(t: &str, s: &str) {
-    trace!(target: t, "{}", s);
+    trace!(target: t, "{s}");
 }
 
 pub fn warn(t: &str, s: &str) {
-    warn!(target: t, "{}", s);
+    warn!(target: t, "{s}");
 }
 
 pub fn info(t: &str, s: &str) {
-    info!(target: t, "{}", s);
+    info!(target: t, "{s}");
 }
 
 pub fn debug(t: &str, s: &str) {
-    debug!(target: t, "{}", s);
+    debug!(target: t, "{s}");
 }
 
 pub fn error(t: &str, s: &str) {
-    error!(target: t, "{}", s);
+    error!(target: t, "{s}");
 }
