@@ -1,4 +1,5 @@
 extern crate log;
+extern crate serde_json;
 
 mod asn_log_config;
 mod asn_log_level;
@@ -9,6 +10,18 @@ pub use asn_log_level::AsnLogLevel;
 
 use log::{debug, error, info, trace, warn};
 use utils_setup::configure_logging;
+
+pub fn init_log_from_json(json_str: &str) -> Result<(), String> {
+    let config_result = AsnLogConfig::from_json(json_str);
+
+    match config_result {
+        Ok(conf) => {
+            init_log(&conf);
+            Ok(())
+        }
+        Err(e) => Err(e.to_string()),
+    }
+}
 
 pub fn init_log(c: &AsnLogConfig) {
     configure_logging(c);
