@@ -1,5 +1,5 @@
 extern crate asn_logger;
-use asn_logger::{init_log, AsnLogConfig, AsnLogLevel};
+use asn_logger::{AsnLogConfig, AsnLogLevel, init_log};
 
 #[cfg(not(feature = "test_messages"))]
 fn main() {
@@ -20,6 +20,6 @@ fn main() {
 
     init_log(&c);
 
-    asn_logger::warn(main_module_name, "Say Warn");
-    asn_logger::trace(main_module_name, "Say Trace"); // don't see this if set AsnLogLevel::Warn to main_module_name
+    asn_logger::t_warn!(main_module_name, "Say Warn");
+    asn_logger::t_trace!(main_module_name, "Say Trace"); // don't see this if set AsnLogLevel::Warn to main_module_name
 }

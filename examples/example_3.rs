@@ -12,6 +12,6 @@ fn main() {
 
     init_log_from_json(json_str.as_str()).unwrap();
 
-    asn_logger::trace(main_module_name, "Say trace");
-    asn_logger::warn(main_module_name, "Say warn");
+    asn_logger::t_trace!(main_module_name, "Say trace");
+    asn_logger::t_warn!(main_module_name, "Say warn");
 }
