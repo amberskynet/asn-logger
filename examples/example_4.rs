@@ -11,9 +11,9 @@ mod module_2 {
     const LOG_MODULE_NAME: &str = "module_2 name";
 
     pub fn look() {
-        asn_logger::t_info!(LOG_MODULE_NAME, "Cool");
+        asn_logger::t_info!("Target module 2", "Cool");
         asn_logger::m_info!("Cool");
-        asn_logger::info!("Cool");
+        asn_logger::log::info!("Cool");
     }
 }
 
@@ -21,9 +21,9 @@ mod module_1 {
     const LOG_MODULE_NAME: &str = "module_1 name";
 
     pub fn look() {
-        asn_logger::t_info!(LOG_MODULE_NAME, "Cool");
+        asn_logger::t_info!("Target module 1", "Cool");
         asn_logger::m_info!("Cool");
-        asn_logger::info!("Cool");
+        asn_logger::log::info!("Cool");
     }
 }
 
@@ -38,7 +38,7 @@ fn main() {
     module_1::look();
     module_2::look();
 
-    asn_logger::t_info!(LOG_MODULE_NAME, "Cool");
+    asn_logger::t_info!("Target main", "Cool");
     asn_logger::m_info!("Cool");
-    asn_logger::info!("Cool");
+    asn_logger::log::info!("Cool");
 }
