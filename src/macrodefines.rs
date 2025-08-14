@@ -1,0 +1,69 @@
+#[macro_export]
+macro_rules! m_error {
+    ($($arg:tt)*) => {
+        ::log::error!( target: LOG_MODULE_NAME, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! m_debug {
+    ($($arg:tt)*) => {
+        ::log::debug!( target: LOG_MODULE_NAME, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! m_info {
+    ($($arg:tt)*) => {
+        ::log::info!( target: LOG_MODULE_NAME, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! m_warn {
+    ($($arg:tt)*) => {
+        ::log::warn!( target: LOG_MODULE_NAME, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! m_trace {
+    ($($arg:tt)*) => {
+        ::log::trace!( target: LOG_MODULE_NAME, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! t_info {
+    ($target:expr, $($arg:tt)*) => {
+        ::log::info!( target: $target, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! t_warn {
+    ($target:expr, $($arg:tt)*) => {
+        ::log::warn!( target: $target, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! t_trace {
+    ($target:expr, $($arg:tt)*) => {
+        ::log::trace!( target: $target, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! t_debug {
+    ($target:expr, $($arg:tt)*) => {
+        ::log::debug!( target: $target, $($arg)+)
+    };
+}
+
+#[macro_export]
+macro_rules! t_error {
+    ($target:expr, $($arg:tt)*) => {
+        ::log::error!( target: $target, $($arg)+)
+    };
+}
