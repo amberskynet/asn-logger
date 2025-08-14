@@ -1,4 +1,4 @@
-extern crate log;
+pub extern crate log;
 extern crate serde_json;
 
 mod asn_log_config;
@@ -9,7 +9,7 @@ mod utils_setup;
 pub use asn_log_config::AsnLogConfig;
 pub use asn_log_level::AsnLogLevel;
 
-pub use log::{debug, error, info, trace, warn};
+// pub use log::{debug, error, info, trace, warn};
 use utils_setup::configure_logging;
 
 pub fn init_log_from_json(json_str: &str) -> Result<(), String> {
@@ -22,6 +22,14 @@ pub fn init_log_from_json(json_str: &str) -> Result<(), String> {
         }
         Err(e) => Err(e.to_string()),
     }
+}
+
+pub fn test_messages() {
+    t_error!("asn-logger", "App error");
+    t_debug!("asn-logger", "App debug");
+    t_info!("asn-logger", "App info");
+    t_warn!("asn-logger", "App warning");
+    t_trace!("asn-logger", "App tracing");
 }
 
 pub fn init_log(c: &AsnLogConfig) {
@@ -37,10 +45,6 @@ pub fn init_log(c: &AsnLogConfig) {
 
     #[cfg(feature = "test_messages")]
     {
-        t_error!("asn-logger", "App error");
-        t_debug!("asn-logger", "App debug");
-        t_info!("asn-logger", "App info");
-        t_warn!("asn-logger", "App warning");
-        t_trace!("asn-logger", "App tracing");
+        test_messages();
     }
 }
