@@ -20,8 +20,3 @@ pub fn setup_log() {
 
     init_log(&c);
 }
-
-#[allow(dead_code)]
-pub fn main() {
-    setup_log();
-}
