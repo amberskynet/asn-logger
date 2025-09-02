@@ -1,6 +1,6 @@
 use crate::asn_log_config::AsnLogConfig;
 
-pub fn configure_logging(c: &AsnLogConfig) {
+pub fn configure_logging(c: &AsnLogConfig) -> Result<(), String> {
     let mut builder = fern::Dispatch::new();
     let level_formatter;
 
@@ -39,5 +39,9 @@ pub fn configure_logging(c: &AsnLogConfig) {
         builder = builder.level_for(m, l);
     }
 
-    let resp = builder.apply();
+    if let Err(e) = builder.apply() {
+        return Err(e.to_string());
+    }
+
+    Ok(())
 }
