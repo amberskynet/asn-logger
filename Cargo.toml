@@ -15,6 +15,21 @@ fern = { version = "0.7.1", features = ["colored"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
+[dev-dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = [
+    "console",
+    "Document",
+    "Element",
+    "HtmlElement",
+    "Node",
+    "Window",
+    "WebGlRenderingContext",
+    "WebGl2RenderingContext",
+] }
+
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 chrono = { version = "0.4.41", features = ["wasmbind"] }
 console_error_panic_hook = "0.1.7"
@@ -23,3 +38,8 @@ console_log = { version = "1.0.0", features = ["color"]}
 [[example]]
 name = "example_1"
 required-features = ["test_messages"]
+
+[[example]]
+name = "ex_web"
+path = "examples/ex_web/src/lib.rs"
+crate-type = ["cdylib"]
