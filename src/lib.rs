@@ -8,7 +8,6 @@ mod utils_setup;
 pub use asn_log_config::AsnLogConfig;
 pub use asn_log_level::AsnLogLevel;
 
-// pub use log::{debug, error, info, trace, warn};
 use utils_setup::configure_logging;
 
 pub fn test_messages() {
