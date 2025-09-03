@@ -26,30 +26,25 @@ release:
 test:
 	$(CARGO) test
 
-# Run tests with test_messages feature
-.PHONY: test-messages
-test-messages:
-	$(CARGO) test --features test_messages
-
 # Run example 1
 .PHONY: run-example-1
 run-example-1:
-	$(CARGO) run --example example_1 --features test_messages
+	$(CARGO) run --example example_1
 
 # Run example 2
 .PHONY: run-example-2
 run-example-2:
-	$(CARGO) run --example example_2 --features test_messages
+	$(CARGO) run --example example_2
 
 # Run example 3
 .PHONY: run-example-3
 run-example-3:
-	$(CARGO) run --example example_3 --features test_messages
+	$(CARGO) run --example example_3
 
 # Run example 4
 .PHONY: run-example-4
 run-example-4:
-	$(CARGO) run --example example_4 --features test_messages
+	$(CARGO) run --example example_4
 
 # Build web example
 .PHONY: build-web
@@ -83,21 +78,6 @@ install-wasm-pack:
 		echo "wasm-pack is already installed"; \
 	fi
 
-# Check code formatting
-.PHONY: fmt
-fmt:
-	$(CARGO) fmt -- --check
-
-# Fix code formatting
-.PHONY: fmt-fix
-fmt-fix:
-	$(CARGO) fmt
-
-# Run clippy linter
-.PHONY: clippy
-clippy:
-	$(CARGO) clippy -- -D warnings
-
 # Help target
 .PHONY: help
 help:
@@ -106,7 +86,6 @@ help:
 	@echo "  build            - Build the main project"
 	@echo "  release          - Build the main project in release mode"
 	@echo "  test             - Run tests"
-	@echo "  test-messages    - Run tests with test_messages feature"
 	@echo "  run-example-1    - Run example 1"
 	@echo "  run-example-2    - Run example 2"
 	@echo "  run-example-3    - Run example 3"
@@ -116,7 +95,4 @@ help:
 	@echo "  doc              - Generate and open documentation"
 	@echo "  clean            - Clean build artifacts"
 	@echo "  install-wasm-pack - Install wasm-pack if not present"
-	@echo "  fmt              - Check code formatting"
-	@echo "  fmt-fix          - Fix code formatting"
-	@echo "  clippy           - Run clippy linter"
 	@echo " help             - Show this help message"

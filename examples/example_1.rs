@@ -22,7 +22,10 @@ fn main() {
 
     init_log(&c);
 
-    test_messages();
+    #[cfg(feature = "test_messages")]
+    {
+        test_messages();
+    }
 
     asn_logger::t_warn!(main_module_name, "Say Warn");
     asn_logger::t_trace!(main_module_name, "Say Trace"); // don't see this if set AsnLogLevel::Warn to main_module_name

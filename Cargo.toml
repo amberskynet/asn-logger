@@ -1,11 +1,10 @@
 [package]
 name = "asn-logger"
-version = "3.0.0"
+version = "3.1.0"
 edition = "2024"
 
 [features]
 default = []
-test_messages = []
 
 [dependencies]
 cfg-if = "1"
