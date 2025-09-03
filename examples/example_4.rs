@@ -33,7 +33,7 @@ fn main() {
         module_levels: Default::default(),
     };
 
-    init_log(&c);
+    init_log(&c).unwrap();
 
     module_1::look();
     module_2::look();
