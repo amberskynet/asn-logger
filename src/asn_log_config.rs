@@ -1,5 +1,6 @@
-use crate::AsnLogLevel;
 use serde::{Deserialize, Serialize};
+
+use crate::AsnLogLevel;
 use std::collections::HashMap;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -21,12 +22,12 @@ impl AsnLogConfig {
     }
 }
 
-impl AsnLogConfig {
-    pub fn from_json(json_str: &str) -> Result<Self, serde_json::Error> {
-        serde_json::from_str(json_str)
-    }
+// impl AsnLogConfig {
+//     pub fn from_json(json_str: &str) -> Result<Self, serde_json::Error> {
+//         serde_json::from_str(json_str)
+//     }
 
-    pub fn to_json(&self) -> Result<String, serde_json::Error> {
-        serde_json::to_string_pretty(self)
-    }
-}
+//     pub fn to_json(&self) -> Result<String, serde_json::Error> {
+//         serde_json::to_string_pretty(self)
+//     }
+// }

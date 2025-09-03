@@ -1,9 +1,9 @@
+// Пример 2: Парсинг конфигурации логгера из JSON строки
+// В этом примере показано, как можно создать конфигурацию логгера, используя JSON строку.
+// Демонстрируется использование serde_json для десериализации JSON в структуру AsnLogConfig.
 extern crate asn_logger;
 
 use asn_logger::AsnLogConfig;
-use std::fs;
-
-const PATH: &str = "./examples/log_config.json";
 
 fn main() {
     let json_str = r#"
@@ -16,7 +16,7 @@ fn main() {
         }
     "#;
 
-    let config_result = AsnLogConfig::from_json(json_str);
+    let config_result: Result<AsnLogConfig, serde_json::Error> = serde_json::from_str(json_str);
 
     match config_result {
         Ok(config) => {
@@ -24,8 +24,4 @@ fn main() {
         }
         Err(e) => eprintln!("Error parsing JSON: {e}"),
     }
-
-    let json_str = fs::read_to_string(PATH).unwrap();
-    let config_result = AsnLogConfig::from_json(json_str.as_str()).unwrap();
-    println!("Parsed config: {config_result:?}");
 }
