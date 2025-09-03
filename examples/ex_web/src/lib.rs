@@ -8,7 +8,9 @@ use wasm_bindgen_futures::spawn_local;
 
 #[wasm_bindgen]
 pub fn init_web_app() -> Result<(), JsValue> {
-    log_utils::setup_log();
+    if let Err(e) = log_utils::setup_log() {
+        return Err(e.into());
+    }
 
     test_messages();
 
