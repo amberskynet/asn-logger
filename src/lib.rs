@@ -1,5 +1,4 @@
 pub extern crate log;
-extern crate serde_json;
 
 mod asn_log_config;
 mod asn_log_level;
@@ -9,20 +8,7 @@ mod utils_setup;
 pub use asn_log_config::AsnLogConfig;
 pub use asn_log_level::AsnLogLevel;
 
-// pub use log::{debug, error, info, trace, warn};
 use utils_setup::configure_logging;
-
-pub fn init_log_from_json(json_str: &str) -> Result<(), String> {
-    let config_result = AsnLogConfig::from_json(json_str);
-
-    match config_result {
-        Ok(conf) => {
-            init_log(&conf);
-            Ok(())
-        }
-        Err(e) => Err(e.to_string()),
-    }
-}
 
 pub fn test_messages() {
     t_error!("asn-logger", "App error");
@@ -32,19 +18,14 @@ pub fn test_messages() {
     t_trace!("asn-logger", "App tracing");
 }
 
-pub fn init_log(c: &AsnLogConfig) {
-    configure_logging(c);
-
+pub fn init_log(c: &AsnLogConfig) -> Result<(), String> {
     cfg_if::cfg_if! {
     if #[cfg(target_arch = "wasm32")] {
         std::panic::set_hook(Box::new(console_error_panic_hook::hook));
-            #[cfg(feature = "test_messages")]
-            debug("asn-logger", "console_error_panic_hook enabled");
+            // выводим средствами браузера а не логгера, он еще не инициализирован
+            web_sys::console::debug_1(&"console_error_panic_hook enabled".into());
         }
     }
 
-    #[cfg(feature = "test_messages")]
-    {
-        test_messages();
-    }
+    configure_logging(c)
 }

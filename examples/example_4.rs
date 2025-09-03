@@ -1,3 +1,6 @@
+// Пример 4: Использование логгера в разных модулях
+// В этом примере показано, как использовать логгер в различных модулях приложения.
+// Демонстрируются различные способы вызова макросов логирования в модулях и в функции main.
 extern crate asn_logger;
 
 use asn_logger::{AsnLogConfig, AsnLogLevel, init_log};
@@ -33,7 +36,7 @@ fn main() {
         module_levels: Default::default(),
     };
 
-    init_log(&c);
+    init_log(&c).unwrap();
 
     module_1::look();
     module_2::look();
