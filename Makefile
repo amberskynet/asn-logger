@@ -29,7 +29,7 @@ test:
 # Run example 1
 .PHONY: run-example-1
 run-example-1:
-	$(CARGO) run --example example_1
+	$(CARGO) run --example example_1 --features test_messages
 
 # Run example 2
 .PHONY: run-example-2
@@ -49,7 +49,7 @@ run-example-4:
 # Build web example
 .PHONY: build-web
 build-web:
-	cd $(WEB_EXAMPLE_DIR) && ./build.sh
+	cd $(WEB_EXAMPLE_DIR) && wasm-pack build --target web
 
 # Run web example
 .PHONY: run-web
@@ -86,13 +86,13 @@ help:
 	@echo "  build            - Build the main project"
 	@echo "  release          - Build the main project in release mode"
 	@echo "  test             - Run tests"
-	@echo "  run-example-1    - Run example 1"
+	@echo "  run-example-1    - Run example 1 (with test_messages feature)"
 	@echo "  run-example-2    - Run example 2"
 	@echo "  run-example-3    - Run example 3"
 	@echo "  run-example-4    - Run example 4"
 	@echo "  build-web        - Build web example"
 	@echo "  run-web          - Run web example"
+	@echo "  install-wasm-pack - Install wasm-pack if not present"
 	@echo "  doc              - Generate and open documentation"
 	@echo "  clean            - Clean build artifacts"
-	@echo "  install-wasm-pack - Install wasm-pack if not present"
-	@echo " help             - Show this help message"
+	@echo "  help             - Show this help message"
